@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation - AckerJS</title>
+  <meta name="description" content="Complete API documentation for AckerJS - DOM, HTTP, and Format utilities">
+  <link rel="stylesheet" href="./styles.css?v=2">
+  <link rel="icon" type="image/png" href="logo.png">
+  <style>
+    .docs-nav {
+      position: sticky;
+      top: 80px;
+      background: var(--bg-light);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+    }
+
+    .docs-nav h3 {
+      color: var(--primary);
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .docs-nav ul {
+      list-style: none;
+    }
+
+    .docs-nav li {
+      margin-bottom: 0.5rem;
+    }
+
+    .docs-nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.3s;
+      display: block;
+      padding: 0.5rem;
+      border-radius: 6px;
+    }
+
+    .docs-nav a:hover {
+      color: var(--primary);
+      background: rgba(129, 140, 248, 0.1);
+    }
+
+    .docs-layout {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      gap: 3rem;
+      padding: 3rem 0;
+    }
+
+    .docs-content {
+      max-width: 800px;
+    }
+
+    .docs-section {
+      margin-bottom: 4rem;
+      scroll-margin-top: 100px;
+    }
+
+    .docs-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 0.5rem;
+    }
+
+    .docs-section h3 {
+      font-size: 1.8rem;
+      margin: 2rem 0 1rem;
+      color: var(--primary);
+    }
+
+    .docs-section h4 {
+      font-size: 1.3rem;
+      margin: 1.5rem 0 0.75rem;
+      color: var(--secondary);
+      font-family: 'Monaco', 'Courier New', monospace;
+    }
+
+    .docs-section p {
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .method-signature {
+      background: var(--code-bg);
+      color: var(--accent);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      font-family: 'Monaco', 'Courier New', monospace;
+      margin: 1rem 0;
+      border-left: 3px solid var(--primary);
+      overflow-x: auto;
+    }
+
+    .param-list {
+      background: var(--bg-light);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border: 1px solid var(--border);
+    }
+
+    .param-list dt {
+      color: var(--primary);
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-weight: 600;
+      margin-top: 0.75rem;
+    }
+
+    .param-list dt:first-child {
+      margin-top: 0;
+    }
+
+    .param-list dd {
+      color: var(--text-light);
+      margin-left: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .code-example {
+      background: var(--code-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+      overflow-x: auto;
+    }
+
+    .code-example pre {
+      margin: 0;
+      font-family: 'Monaco', 'Courier New', monospace;
+      color: var(--code-text);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .note {
+      background: rgba(129, 140, 248, 0.1);
+      border-left: 3px solid var(--primary);
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 4px;
+    }
+
+    .note strong {
+      color: var(--primary);
+    }
+
+    @media (max-width: 968px) {
+      .docs-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .docs-nav {
+        position: static;
+        max-height: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="nav-brand">
+        <img src="logo.png" alt="AckerJS Logo" class="logo">
+        <span class="brand-name">AckerJS</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="docs.html">Docs</a></li>
+        <li><a href="https://github.com/acker-technologies/ackerjs" target="_blank">GitHub</a></li>
+        <li><a href="index.html#get-started" class="btn-primary">Get Started</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="docs-layout">
+      <!-- Sidebar Navigation -->
+      <aside class="docs-nav">
+        <h3>Getting Started</h3>
+        <ul>
+          <li><a href="#installation">Installation</a></li>
+          <li><a href="#usage">Basic Usage</a></li>
+        </ul>
+
+        <h3>DOM Module</h3>
+        <ul>
+          <li><a href="#dom-select">select()</a></li>
+          <li><a href="#dom-selectall">selectAll()</a></li>
+          <li><a href="#dom-create">create()</a></li>
+          <li><a href="#dom-append">append()</a></li>
+          <li><a href="#dom-remove">remove()</a></li>
+          <li><a href="#dom-classes">Class Methods</a></li>
+          <li><a href="#dom-events">Event Methods</a></li>
+          <li><a href="#dom-attributes">Attribute Methods</a></li>
+        </ul>
+
+        <h3>HTTP Module</h3>
+        <ul>
+          <li><a href="#http-fetchjson">fetchJSON()</a></li>
+          <li><a href="#http-postjson">postJSON()</a></li>
+          <li><a href="#http-putjson">putJSON()</a></li>
+          <li><a href="#http-deletejson">deleteJSON()</a></li>
+          <li><a href="#http-methods">Generic Methods</a></li>
+          <li><a href="#http-api">API Instance</a></li>
+        </ul>
+
+        <h3>Format Module</h3>
+        <ul>
+          <li><a href="#format-dates">Date Formatting</a></li>
+          <li><a href="#format-numbers">Number Formatting</a></li>
+          <li><a href="#format-strings">String Formatting</a></li>
+          <li><a href="#format-case">Case Conversion</a></li>
+        </ul>
+      </aside>
+
+      <!-- Main Documentation Content -->
+      <main class="docs-content">
+        <!-- Getting Started -->
+        <section id="installation" class="docs-section">
+          <h2>Installation</h2>
+          <p>Install AckerJS via npm, yarn, or pnpm:</p>
+          <div class="code-example">
+            <pre><code># Using npm
+npm install ackerjs
+
+# Using yarn
+yarn add ackerjs
+
+# Using pnpm
+pnpm add ackerjs</code></pre>
+          </div>
+        </section>
+
+        <section id="usage" class="docs-section">
+          <h2>Basic Usage</h2>
+          <p>AckerJS can be imported in multiple ways depending on your needs:</p>
+          
+          <h3>Import Everything</h3>
+          <div class="code-example">
+            <pre><code>import { DOM, HTTP, Format } from 'ackerjs';
+
+// Use the modules
+const element = DOM.select('#app');
+const data = await HTTP.fetchJSON('/api/data');
+const formatted = Format.formatDate(new Date());</code></pre>
+          </div>
+
+          <h3>Import Specific Modules (Better Tree-Shaking)</h3>
+          <div class="code-example">
+            <pre><code>import * as DOM from 'ackerjs/dom';
+import * as HTTP from 'ackerjs/http';
+import * as Format from 'ackerjs/format';</code></pre>
+          </div>
+
+          <h3>Import Individual Functions</h3>
+          <div class="code-example">
+            <pre><code>import { select, create, append } from 'ackerjs';
+
+const container = select('#container');
+const button = create('button', { textContent: 'Click Me' });
+append(container, button);</code></pre>
+          </div>
+        </section>
+
+        <!-- DOM Module -->
+        <section id="dom-select" class="docs-section">
+          <h2>DOM Module</h2>
+          <p>The DOM module provides utilities for selecting and manipulating DOM elements with type safety.</p>
+
+          <h3>select(selector)</h3>
+          <p>Select a single DOM element using a CSS selector.</p>
+          
+          <div class="method-signature">
+            select(selector: string): HTMLElement | null
+          </div>
+
+          <dl class="param-list">
+            <dt>selector</dt>
+            <dd>CSS selector string (e.g., '#id', '.class', 'div')</dd>
+            <dt>Returns</dt>
+            <dd>The first matching HTMLElement or null if not found</dd>
+          </dl>
+
+          <div class="code-example">
+            <pre><code>import { DOM } from 'ackerjs';
+
+// Select by ID
+const app = DOM.select('#app');
+
+// Select by class
+const header = DOM.select('.header');
+
+// Select by tag
+const firstDiv = DOM.select('div');
+
+// Complex selector
+const button = DOM.select('nav .menu button.active');</code></pre>
+          </div>
+        </section>
+
+        <section id="dom-selectall" class="docs-section">
+          <h4>selectAll(selector)</h4>
+          <p>Select all DOM elements matching a CSS selector.</p>
+          
+          <div class="method-signature">
+            selectAll(selector: string): HTMLElement[]
+          </div>
+
+          <dl class="param-list">
+            <dt>selector</dt>
+            <dd>CSS selector string</dd>
+            <dt>Returns</dt>
+            <dd>Array of matching HTMLElements (empty array if none found)</dd>
+          </dl>
+
+          <div class="code-example">
+            <pre><code>import { DOM } from 'ackerjs';
+
+// Select all elements with class
+const items = DOM.selectAll('.item');
+
+// Iterate over elements
+items.forEach(item => {
+  DOM.addClass(item, 'processed');
+});
+
+// Get count
+console.log(`Found ${items.length} items`);</code></pre>
+          </div>
+        </section>
+
+        <section id="dom-create" class="docs-section">
+          <h4>create(tag, props?)</h4>
+          <p>Create a new DOM element with optional properties.</p>
+          
+          <div class="method-signature">
+            create(tag: string, props?: Record&lt;string, any&gt;): HTMLElement
+          </div>
+
+          <dl class="param-list">
+            <dt>tag</dt>
+            <dd>HTML tag name (e.g., 'div', 'button', 'span')</dd>
+            <dt>props</dt>
+            <dd>Optional object containing element properties (className, id, textContent, etc.)</dd>
+            <dt>Returns</dt>
+            <dd>Newly created HTMLElement</dd>
+          </dl>
+
+          <div class="code-example">
+            <pre><code>import { DOM } from 'ackerjs';
+
+// Simple element
+const div = DOM.create('div');
+
+// With properties
+const button = DOM.create('button', {
+  className: 'btn btn-primary',
+  id: 'submit-btn',
+  textContent: 'Submit',
+  disabled: false
+});
+
+// With data attributes
+const card = DOM.create('div', {
+  className: 'card',
+  'data-id': '123',
+  'data-type': 'product'
+});
+
+// With inline styles
+const box = DOM.create('div', {
+  style: 'width: 100px; height: 100px; background: blue;'
+});</code></pre>
+          </div>
+        </section>
+
+        <section id="dom-append" class="docs-section">
+          <h4>append(parent, child)</h4>
+          <p>Append a child element to a parent element.</p>
+          
+          <div class="method-signature">
+            append(parent: HTMLElement, child: HTMLElement): void
+          </div>
+
+          <dl class="param-list">
+            <dt>parent</dt>
+            <dd>Parent HTMLElement to append to</dd>
+            <dt>child</dt>
+            <dd>Child HTMLElement to append</dd>
+          </dl>
+
+          <div class="code-example">
+            <pre><code>import { DOM } from 'ackerjs';
+
+const container = DOM.select('#container');
+const title = DOM.create('h1', { textContent: 'Welcome' });
+const paragraph = DOM.create('p', { textContent: 'Hello World' });
+
+DOM.append(container, title);
+DOM.append(container, paragraph);</code></pre>
+          </div>
+        </section>
+
+        <section id="dom-remove" class="docs-section">
+          <h4>remove(element)</h4>
+          <p>Remove an element from the DOM.</p>
+          
+          <div class="method-signature">
+            remove(element: HTMLElement): void
+          </div>
+
+          <div class="code-example">
+            <pre><code>import { DOM } from 'ackerjs';
+
+const element = DOM.select('#old-element');
+DOM.remove(element);</code></pre>
+          </div>
+        </section>
+
+        <section id="dom-classes" class="docs-section">
+          <h3>Class Manipulation</h3>
+
+          <h4>addClass(element, ...classes)</h4>
+          <p>Add one or more CSS classes to an element.</p>
+          
+          <div class="method-signature">
+            addClass(element: HTMLElement, ...classes: string[]): void
+          </div>
+
+          <div class="code-example">
+            <pre><code>import { DOM } from 'ackerjs';
+
+const button = DOM.select('#btn');
+
+// Add single class
+DOM.addClass(button, 'active');
+
+// Add multiple classes
+DOM.addClass(button, 'btn', 'btn-primary', 'large');</code></pre>
+          </div>
+
+          <h4>removeClass(element, ...classes)</h4>
+          <p>Remove one or more CSS classes from an element.</p>
+          
+          <div class="method-signature">
+            removeClass(element: HTMLElement, ...classes: string[]): void
+          </div>
+
+          <div class="code-example">
+            <pre><code>import { DOM } from 'ackerjs';
+
+const button = DOM.select('#btn');
+DOM.removeClass(button, 'active', 'loading');</code></pre>
+          </div>
+
+          <h4>toggleClass(element, className)</h4>
+          <p>Toggle a CSS class on an element.</p>
+          
+          <div class="method-signature">
+            toggleClass(element: HTMLElement, className: string): void
+          </div>
+
+          <div class="code-example">
+            <pre><code>import { DOM } from 'ackerjs';
+
+const menu = DOM.select('#menu');
+const toggle = DOM.select('#toggle-btn');
+
+DOM.on(toggle, 'click', () => {
+  DOM.toggleClass(menu, 'open');
+});</code></pre>
+          </div>
+
+          <h4>hasClass(element, className)</h4>
+          <p>Check if an element has a specific CSS class.</p>
+          
+          <div class="method-signature">
+            hasClass(element: HTMLElement, className: string): boolean
+          </div>
+
+          <div class="code-example">
+            <pre><code>import { DOM } from 'ackerjs';
+
+const button = DOM.select('#btn');
+
+if (DOM.hasClass(button, 'active')) {
+  console.log('Button is active');
+}</code></pre>
+          </div>
+        </section>
+
+        <section id="dom-events" class="docs-section">
+          <h3>Event Handling</h3>
+
+          <h4>on(element, event, handler)</h4>
+          <p>Add an event listener to an element.</p>
+          
+          <div class="method-signature">
+            on(element: HTMLElement, event: string, handler: EventListener): void
+          </div>
+
+          <div class="code-example">
+            <pre><code>import { DOM } from 'ackerjs';
+
+const button = DOM.select('#btn');
+
+DOM.on(button, 'click', (e) => {
+  console.log('Button clicked!', e);
+});
+
+DOM.on(button, 'mouseenter', () => {
+  DOM.addClass(button, 'hover');
+});
+
+DOM.on(button, 'mouseleave', () => {
+  DOM.removeClass(button, 'hover');
+});</code></pre>
+          </div>
+
+          <h4>off(element, event, handler)</h4>
+          <p>Remove an event listener from an element.</p>
+          
+          <div class="method-signature">
+            off(element: HTMLElement, event: string, handler: EventListener): void
+          </div>
+
+          <div class="code-example">
+            <pre><code>import { DOM } from 'ackerjs';
+
+const button = DOM.select('#btn');
+
+const clickHandler = (e) => {
+  console.log('Clicked!');
+};
+
+DOM.on(button, 'click', clickHandler);
+
+// Later, remove the listener
+DOM.off(button, 'click', clickHandler);</code></pre>
+          </div>
+        </section>
+
+        <section id="dom-attributes" class="docs-section">
+          <h3>Attributes & Properties</h3>
+
+          <h4>attr(element, name, value?)</h4>
+          <p>Get or set an element's attribute.</p>
+          
+          <div class="method-signature">
+            attr(element: HTMLElement, name: string, value?: string): string | void
+          </div>
+
+          <div class="code-example">
+            <pre><code>import { DOM } from 'ackerjs';
+
+const input = DOM.select('#email');
+
+// Set attribute
+DOM.attr(input, 'placeholder', 'Enter email');
+DOM.attr(input, 'required', 'true');
+
+// Get attribute
+const placeholder = DOM.attr(input, 'placeholder');
+console.log(placeholder); // "Enter email"</code></pre>
+          </div>
+
+          <h4>data(element, key, value?)</h4>
+          <p>Get or set data attributes.</p>
+          
+          <div class="method-signature">
+            data(element: HTMLElement, key: string, value?: string): string | void
+          </div>
+
+          <div class="code-example">
+            <pre><code>import { DOM } from 'ackerjs';
+
+const card = DOM.select('.card');
+
+// Set data attribute
+DOM.data(card, 'id', '123');
+DOM.data(card, 'type', 'product');
+
+// Get data attribute
+const id = DOM.data(card, 'id');
+console.log(id); // "123"</code></pre>
+          </div>
+        </section>
+
+        <!-- HTTP Module -->
+        <section id="http-fetchjson" class="docs-section">
+          <h2>HTTP Module</h2>
+          <p>The HTTP module provides fetch wrappers with automatic JSON parsing and error handling.</p>
+
+          <h3>fetchJSON(url, options?)</h3>
+          <p>Fetch JSON data with automatic error handling and parsing.</p>
+          
+          <div class="method-signature">
+            fetchJSON&lt;T&gt;(url: string, options?: RequestInit): Promise&lt;T&gt;
+          </div>
+
+          <dl class="param-list">
+            <dt>url</dt>
+            <dd>URL to fetch from</dd>
+            <dt>options</dt>
+            <dd>Optional fetch options (headers, credentials, etc.)</dd>
+            <dt>Returns</dt>
+            <dd>Promise resolving to parsed JSON data</dd>
+          </dl>
+
+          <div class="code-example">
+            <pre><code>import { HTTP } from 'ackerjs';
+
+// Simple GET request
+const user = await HTTP.fetchJSON('https://api.example.com/user/1');
+console.log(user.name);
+
+// With TypeScript types
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+const user = await HTTP.fetchJSON&lt;User&gt;('/api/user/1');
+
+// With custom headers
+const data = await HTTP.fetchJSON('/api/data', {
+  headers: {
+    'Authorization': 'Bearer token123',
+    'X-Custom-Header': 'value'
+  }
+});</code></pre>
+          </div>
+        </section>
+
+        <section id="http-postjson" class="docs-section">
+          <h4>postJSON(url, data, options?)</h4>
+          <p>Send a POST request with JSON data.</p>
+          
+          <div class="method-signature">
+            postJSON&lt;T&gt;(url: string, data: any, options?: RequestInit): Promise&lt;T&gt;
+          </div>
+
+          <div class="code-example">
+            <pre><code>import { HTTP } from 'ackerjs';
+
+// Create a new user
+const newUser = await HTTP.postJSON('/api/users', {
+  name: 'John Doe',
+  email: 'john@example.com',
+  age: 30
+});
+
+console.log(`Created user with ID: ${newUser.id}`);</code></pre>
+          </div>
+        </section>
+
+        <section id="http-putjson" class="docs-section">
+          <h4>putJSON(url, data, options?)</h4>
+          <p>Send a PUT request with JSON data.</p>
+          
+          <div class="method-signature">
+            putJSON&lt;T&gt;(url: string, data: any, options?: RequestInit): Promise&lt;T&gt;
+          </div>
+
+          <div class="code-example">
+            <pre><code>import { HTTP } from 'ackerjs';
+
+// Update existing user
+const updated = await HTTP.putJSON('/api/users/1', {
+  name: 'Jane Doe',
+  email: 'jane@example.com'
+});</code></pre>
+          </div>
+        </section>
+
+        <section id="http-deletejson" class="docs-section">
+          <h4>deleteJSON(url, options?)</h4>
+          <p>Send a DELETE request.</p>
+          
+          <div class="method-signature">
+            deleteJSON&lt;T&gt;(url: string, options?: RequestInit): Promise&lt;T&gt;
+          </div>
+
+          <div class="code-example">
+            <pre><code>import { HTTP } from 'ackerjs';
+
+// Delete a user
+await HTTP.deleteJSON('/api/users/1');
+console.log('User deleted');</code></pre>
+          </div>
+        </section>
+
+        <section id="http-methods" class="docs-section">
+          <h3>Generic HTTP Methods</h3>
+          <p>Lower-level methods for custom requests.</p>
+
+          <h4>get(url, options?)</h4>
+          <div class="method-signature">
+            get&lt;T&gt;(url: string, options?: RequestInit): Promise&lt;T&gt;
+          </div>
+
+          <h4>post(url, data, options?)</h4>
+          <div class="method-signature">
+            post&lt;T&gt;(url: string, data: any, options?: RequestInit): Promise&lt;T&gt;
+          </div>
+
+          <h4>put(url, data, options?)</h4>
+          <div class="method-signature">
+            put&lt;T&gt;(url: string, data: any, options?: RequestInit): Promise&lt;T&gt;
+          </div>
+
+          <h4>del(url, options?)</h4>
+          <div class="method-signature">
+            del&lt;T&gt;(url: string, options?: RequestInit): Promise&lt;T&gt;
+          </div>
+        </section>
+
+        <section id="http-api" class="docs-section">
+          <h3>API Instance</h3>
+          <p>Create a reusable API instance with a base URL.</p>
+
+          <h4>createAPI(baseURL, defaultOptions?)</h4>
+          <div class="method-signature">
+            createAPI(baseURL: string, defaultOptions?: RequestInit): APIInstance
+          </div>
+
+          <div class="code-example">
+            <pre><code>import { HTTP } from 'ackerjs';
+
+// Create API instance
+const api = HTTP.createAPI('https://api.example.com', {
+  headers: {
+    'Authorization': 'Bearer token123',
+    'Content-Type': 'application/json'
+  }
+});
+
+// Use the instance
+const users = await api.get('/users');
+const newUser = await api.post('/users', { name: 'John' });
+const updated = await api.put('/users/1', { name: 'Jane' });
+await api.delete('/users/1');</code></pre>
+          </div>
+        </section>
+
+        <!-- Format Module -->
+        <section id="format-dates" class="docs-section">
+          <h2>Format Module</h2>
+          <p>The Format module provides utilities for formatting dates, numbers, and strings.</p>
+
+          <h3>Date Formatting</h3>
+
+          <h4>formatDate(date, locale?)</h4>
+          <p>Format a date using the browser's locale or specified locale.</p>
+          
+          <div class="method-signature">
+            formatDate(date: Date, locale?: string): string
+          </div>
+
+          <div class="code-example">
+            <pre><code>import { Format } from 'ackerjs';
+
+const now = new Date();
+
+// Default locale
+Format.formatDate(now);
+// "11/16/2025"
+
+// Specific locale
+Format.formatDate(now, 'en-GB');
+// "16/11/2025"
+
+Format.formatDate(now, 'de-DE');
+// "16.11.2025"</code></pre>
+          </div>
+
+          <h4>formatDateTime(date, locale?)</h4>
+          <p>Format a date and time.</p>
+          
+          <div class="method-signature">
+            formatDateTime(date: Date, locale?: string): string
+          </div>
+
+          <div class="code-example">
+            <pre><code>import { Format } from 'ackerjs';
+
+Format.formatDateTime(new Date());
+// "11/16/2025, 2:30:45 PM"</code></pre>
+          </div>
+
+          <h4>formatTime(date, locale?)</h4>
+          <p>Format just the time portion.</p>
+          
+          <div class="method-signature">
+            formatTime(date: Date, locale?: string): string
+          </div>
+
+          <div class="code-example">
+            <pre><code>import { Format } from 'ackerjs';
+
+Format.formatTime(new Date());
+// "2:30:45 PM"</code></pre>
+          </div>
+        </section>
+
+        <section id="format-numbers" class="docs-section">
+          <h3>Number Formatting</h3>
+
+          <h4>formatNumber(num, decimals?, locale?)</h4>
+          <p>Format a number with optional decimal places.</p>
+          
+          <div class="method-signature">
+            formatNumber(num: number, decimals?: number, locale?: string): string
+          </div>
+
+          <div class="code-example">
+            <pre><code>import { Format } from 'ackerjs';
+
+Format.formatNumber(1234567.89);
+// "1,234,567.89"
+
+Format.formatNumber(1234.5678, 2);
+// "1,234.57"
+
+Format.formatNumber(1234.56, 2, 'de-DE');
+// "1.234,56"</code></pre>
+          </div>
+
+          <h4>formatCurrency(amount, currency?, locale?)</h4>
+          <p>Format a number as currency.</p>
+          
+          <div class="method-signature">
+            formatCurrency(amount: number, currency?: string, locale?: string): string
+          </div>
+
+          <div class="code-example">
+            <pre><code>import { Format } from 'ackerjs';
+
+Format.formatCurrency(1234.56);
+// "$1,234.56"
+
+Format.formatCurrency(1234.56, 'EUR', 'de-DE');
+// "1.234,56 €"
+
+Format.formatCurrency(1234.56, 'GBP', 'en-GB');
+// "£1,234.56"</code></pre>
+          </div>
+
+          <h4>formatPercent(num, decimals?)</h4>
+          <p>Format a number as a percentage.</p>
+          
+          <div class="method-signature">
+            formatPercent(num: number, decimals?: number): string
+          </div>
+
+          <div class="code-example">
+            <pre><code>import { Format } from 'ackerjs';
+
+Format.formatPercent(0.1234);
+// "12.34%"
+
+Format.formatPercent(0.1234, 1);
+// "12.3%"</code></pre>
+          </div>
+        </section>
+
+        <section id="format-strings" class="docs-section">
+          <h3>String Formatting</h3>
+
+          <h4>capitalize(str)</h4>
+          <p>Capitalize the first letter of a string.</p>
+          
+          <div class="method-signature">
+            capitalize(str: string): string
+          </div>
+
+          <div class="code-example">
+            <pre><code>import { Format } from 'ackerjs';
+
+Format.capitalize('hello world');
+// "Hello world"</code></pre>
+          </div>
+
+          <h4>capitalizeWords(str)</h4>
+          <p>Capitalize the first letter of each word.</p>
+          
+          <div class="method-signature">
+            capitalizeWords(str: string): string
+          </div>
+
+          <div class="code-example">
+            <pre><code>import { Format } from 'ackerjs';
+
+Format.capitalizeWords('hello world from ackerjs');
+// "Hello World From Ackerjs"</code></pre>
+          </div>
+
+          <h4>truncate(str, length, suffix?)</h4>
+          <p>Truncate a string to a specified length.</p>
+          
+          <div class="method-signature">
+            truncate(str: string, length: number, suffix?: string): string
+          </div>
+
+          <div class="code-example">
+            <pre><code>import { Format } from 'ackerjs';
+
+Format.truncate('Hello World', 5);
+// "Hello..."
+
+Format.truncate('Hello World', 5, '…');
+// "Hello…"
+
+Format.truncate('Hi', 10);
+// "Hi" (no truncation needed)</code></pre>
+          </div>
+
+          <h4>slugify(str)</h4>
+          <p>Convert a string to a URL-friendly slug.</p>
+          
+          <div class="method-signature">
+            slugify(str: string): string
+          </div>
+
+          <div class="code-example">
+            <pre><code>import { Format } from 'ackerjs';
+
+Format.slugify('Hello World!');
+// "hello-world"
+
+Format.slugify('AckerJS Framework 2024');
+// "ackerjs-framework-2024"
+
+Format.slugify('  Spaces   and   Punctuation!!! ');
+// "spaces-and-punctuation"</code></pre>
+          </div>
+        </section>
+
+        <section id="format-case" class="docs-section">
+          <h3>Case Conversion</h3>
+
+          <h4>camelCase(str)</h4>
+          <p>Convert a string to camelCase.</p>
+          
+          <div class="method-signature">
+            camelCase(str: string): string
+          </div>
+
+          <div class="code-example">
+            <pre><code>import { Format } from 'ackerjs';
+
+Format.camelCase('hello-world');
+// "helloWorld"
+
+Format.camelCase('hello_world');
+// "helloWorld"
+
+Format.camelCase('Hello World');
+// "helloWorld"</code></pre>
+          </div>
+
+          <h4>kebabCase(str)</h4>
+          <p>Convert a string to kebab-case.</p>
+          
+          <div class="method-signature">
+            kebabCase(str: string): string
+          </div>
+
+          <div class="code-example">
+            <pre><code>import { Format } from 'ackerjs';
+
+Format.kebabCase('helloWorld');
+// "hello-world"
+
+Format.kebabCase('HelloWorld');
+// "hello-world"
+
+Format.kebabCase('hello_world');
+// "hello-world"</code></pre>
+          </div>
+
+          <h4>snakeCase(str)</h4>
+          <p>Convert a string to snake_case.</p>
+          
+          <div class="method-signature">
+            snakeCase(str: string): string
+          </div>
+
+          <div class="code-example">
+            <pre><code>import { Format } from 'ackerjs';
+
+Format.snakeCase('helloWorld');
+// "hello_world"
+
+Format.snakeCase('Hello World');
+// "hello_world"</code></pre>
+          </div>
+        </section>
+
+        <!-- Additional Resources -->
+        <section class="docs-section">
+          <h2>Additional Resources</h2>
+          
+          <div class="note">
+            <strong>TypeScript Support:</strong> AckerJS is built with TypeScript and includes full type definitions. You'll get IntelliSense and type checking out of the box.
+          </div>
+
+          <div class="note">
+            <strong>Tree-Shaking:</strong> Import only what you need for smaller bundle sizes. Modern bundlers will automatically remove unused code.
+          </div>
+
+          <div class="note">
+            <strong>Browser Support:</strong> AckerJS targets ES2020+ and works in all modern browsers. For older browsers, use a transpiler like Babel.
+          </div>
+
+          <h3>Need Help?</h3>
+          <ul style="color: var(--text-light); line-height: 2;">
+            <li><a href="https://github.com/acker-technologies/ackerjs/issues" style="color: var(--primary);">Report an Issue</a></li>
+            <li><a href="https://github.com/acker-technologies/ackerjs/discussions" style="color: var(--primary);">Join Discussions</a></li>
+            <li><a href="https://www.npmjs.com/package/ackerjs" style="color: var(--primary);">View on NPM</a></li>
+          </ul>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img src="logo.png" alt="AckerJS Logo" class="footer-logo">
+          <p>A lightweight JavaScript framework for modern web development.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4>Framework</h4>
+            <ul>
+              <li><a href="https://github.com/acker-technologies/ackerjs">GitHub</a></li>
+              <li><a href="https://www.npmjs.com/package/ackerjs">NPM Package</a></li>
+              <li><a href="docs.html">Documentation</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Tools</h4>
+            <ul>
+              <li><a href="https://www.npmjs.com/package/create-acker-app">create-acker-app</a></li>
+              <li><a href="https://www.npmjs.com/package/acker-ui">AckerUI</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Community</h4>
+            <ul>
+              <li><a href="https://github.com/acker-technologies/ackerjs/issues">Issues</a></li>
+              <li><a href="https://github.com/acker-technologies/ackerjs/discussions">Discussions</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Acker Technologies. MIT License.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>
