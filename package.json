@@ -1,0 +1,50 @@
+{
+  "name": "ackerjs",
+  "version": "1.0.0",
+  "description": "A lightweight, modular JavaScript framework for developers with TypeScript support",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./dom": {
+      "import": "./dist/dom/index.js",
+      "types": "./dist/dom/index.d.ts"
+    },
+    "./http": {
+      "import": "./dist/http/index.js",
+      "types": "./dist/http/index.d.ts"
+    },
+    "./format": {
+      "import": "./dist/format/index.js",
+      "types": "./dist/format/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "ackerjs",
+    "framework",
+    "lightweight",
+    "modular",
+    "typescript",
+    "dom",
+    "http",
+    "utilities"
+  ],
+  "author": "Acker Technologies",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.3.0"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ]
+}
