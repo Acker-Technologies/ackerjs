@@ -39,6 +39,7 @@ export * as Format from './format/index.js';
 
 // Named exports for convenience
 export { select, selectAll, create, append, remove, addClass, removeClass, toggleClass } from './dom/index.js';
+export { component } from './dom/component.js';
 export { fetchJSON, postJSON, putJSON, deleteJSON, get, post, put, del } from './http/index.js';
 export { formatDate, formatDateTime, formatTime, capitalize, truncate, formatNumber, formatCurrency } from './format/index.js';
 

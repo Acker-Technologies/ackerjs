@@ -3,6 +3,8 @@
  * Provides simple, type-safe functions for DOM manipulation
  */
 
+export { component } from './component.js';
+
 /**
  * Select a single DOM element using a CSS selector
  * @param selector - CSS selector string
@@ -46,7 +48,7 @@ export function selectAll(selector: string): HTMLElement[] {
 export function create(tag: string, props?: Record<string, any>): HTMLElement {
   try {
     const element = document.createElement(tag);
-    
+
     if (props) {
       Object.entries(props).forEach(([key, value]) => {
         if (key === 'style' && typeof value === 'object') {
@@ -63,7 +65,7 @@ export function create(tag: string, props?: Record<string, any>): HTMLElement {
         }
       });
     }
-    
+
     return element;
   } catch (error) {
     console.error(`[AckerJS DOM] Error creating element: ${tag}`, error);
@@ -83,7 +85,7 @@ export function append(parent: HTMLElement, child: HTMLElement): void {
     console.error('[AckerJS DOM] Invalid parent or child element for append');
     return;
   }
-  
+
   try {
     parent.appendChild(child);
   } catch (error) {
@@ -102,7 +104,7 @@ export function remove(element: HTMLElement): void {
     console.error('[AckerJS DOM] Invalid element for removal');
     return;
   }
-  
+
   try {
     element.remove();
   } catch (error) {
@@ -122,7 +124,7 @@ export function addClass(element: HTMLElement, ...classes: string[]): void {
     console.error('[AckerJS DOM] Invalid element for addClass');
     return;
   }
-  
+
   try {
     element.classList.add(...classes);
   } catch (error) {
@@ -142,7 +144,7 @@ export function removeClass(element: HTMLElement, ...classes: string[]): void {
     console.error('[AckerJS DOM] Invalid element for removeClass');
     return;
   }
-  
+
   try {
     element.classList.remove(...classes);
   } catch (error) {
@@ -163,7 +165,7 @@ export function toggleClass(element: HTMLElement, className: string): boolean {
     console.error('[AckerJS DOM] Invalid element for toggleClass');
     return false;
   }
-  
+
   try {
     return element.classList.toggle(className);
   } catch (error) {
@@ -185,7 +187,7 @@ export function hasClass(element: HTMLElement, className: string): boolean {
     console.error('[AckerJS DOM] Invalid element for hasClass');
     return false;
   }
-  
+
   return element.classList.contains(className);
 }
 
@@ -208,7 +210,7 @@ export function on(
     console.error('[AckerJS DOM] Invalid element or handler for event listener');
     return;
   }
-  
+
   try {
     element.addEventListener(event, handler, options);
   } catch (error) {
@@ -235,7 +237,7 @@ export function off(
     console.error('[AckerJS DOM] Invalid element or handler for removing event listener');
     return;
   }
-  
+
   try {
     element.removeEventListener(event, handler, options);
   } catch (error) {
@@ -255,7 +257,7 @@ export function setAttributes(element: HTMLElement, attributes: Record<string, s
     console.error('[AckerJS DOM] Invalid element for setAttributes');
     return;
   }
-  
+
   try {
     Object.entries(attributes).forEach(([key, value]) => {
       element.setAttribute(key, value);
@@ -278,7 +280,7 @@ export function getAttribute(element: HTMLElement, attribute: string): string | 
     console.error('[AckerJS DOM] Invalid element for getAttribute');
     return null;
   }
-  
+
   return element.getAttribute(attribute);
 }
 
@@ -294,7 +296,7 @@ export function removeAttribute(element: HTMLElement, attribute: string): void {
     console.error('[AckerJS DOM] Invalid element for removeAttribute');
     return;
   }
-  
+
   try {
     element.removeAttribute(attribute);
   } catch (error) {
@@ -314,7 +316,7 @@ export function setStyles(element: HTMLElement, styles: Partial<CSSStyleDeclarat
     console.error('[AckerJS DOM] Invalid element for setStyles');
     return;
   }
-  
+
   try {
     Object.assign(element.style, styles);
   } catch (error) {
@@ -334,7 +336,7 @@ export function getStyles(element: HTMLElement): CSSStyleDeclaration {
   if (!element) {
     throw new Error('[AckerJS DOM] Invalid element for getStyles');
   }
-  
+
   return window.getComputedStyle(element);
 }
 
@@ -349,7 +351,7 @@ export function empty(element: HTMLElement): void {
     console.error('[AckerJS DOM] Invalid element for empty');
     return;
   }
-  
+
   try {
     while (element.firstChild) {
       element.removeChild(element.firstChild);
@@ -371,7 +373,7 @@ export function clone(element: HTMLElement, deep: boolean = true): HTMLElement {
   if (!element) {
     throw new Error('[AckerJS DOM] Invalid element for clone');
   }
-  
+
   return element.cloneNode(deep) as HTMLElement;
 }
 
@@ -388,7 +390,7 @@ export function matches(element: HTMLElement, selector: string): boolean {
     console.error('[AckerJS DOM] Invalid element for matches');
     return false;
   }
-  
+
   try {
     return element.matches(selector);
   } catch (error) {
@@ -410,7 +412,7 @@ export function closest(element: HTMLElement, selector: string): HTMLElement | n
     console.error('[AckerJS DOM] Invalid element for closest');
     return null;
   }
-  
+
   try {
     return element.closest<HTMLElement>(selector);
   } catch (error) {

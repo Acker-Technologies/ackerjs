@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AckerJS Component Test</title>
+</head>
+<body>
+    <div id="app">
+        <h1>AckerJS Component System Test</h1>
+        
+        <!-- Test Component Usage -->
+        <user-card 
+            name="John Doe" 
+            role="Software Engineer" 
+            avatar="https://via.placeholder.com/150"
+        ></user-card>
+
+        <user-card 
+            name="Jane Smith" 
+            role="Product Manager" 
+            avatar="https://via.placeholder.com/150"
+        ></user-card>
+
+        <div style="margin-top: 20px;">
+            <button id="update-btn">Update Jane's Role</button>
+        </div>
+    </div>
+
+    <!-- Load the script -->
+    <script type="module" src="./component-test.js"></script>
+</body>
+</html>
