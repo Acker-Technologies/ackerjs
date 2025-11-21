@@ -24,6 +24,13 @@
         <p>AckerJS is a lightweight, modular JavaScript framework designed to make modern web development simpler and
           faster. It provides essential utilities for DOM manipulation, HTTP requests, and data formatting without the
           bloat of larger frameworks.</p>
+        <p>Key features:</p>
+        <ul>
+          <li><strong>Lightweight:</strong> Zero dependencies and tiny bundle size.</li>
+          <li><strong>Modular:</strong> Import only what you need.</li>
+          <li><strong>TypeScript:</strong> Built with TypeScript for excellent developer experience.</li>
+          <li><strong>Components:</strong> Simple, lightweight Web Component system.</li>
+        </ul>
       </section>
 
       <hr style="margin: 2rem 0; border: 0; border-top: 1px solid var(--border);">
@@ -38,9 +45,186 @@
 
       <hr style="margin: 2rem 0; border: 0; border-top: 1px solid var(--border);">
 
+      <section id="usage">
+        <h2>Basic Usage</h2>
+        <p>AckerJS is modular, so you can import everything or just specific modules.</p>
+        <h3>Import Everything</h3>
+        <pre><code>import { DOM, HTTP, Format } from 'ackerjs';
+
+const el = DOM.select('#app');
+HTTP.get('/api/data').then(data => console.log(data));</code></pre>
+
+        <h3>Import Specific Modules</h3>
+        <pre><code>import { select, create } from 'ackerjs/dom';
+import { fetchJSON } from 'ackerjs/http';
+import { formatDate } from 'ackerjs/format';</code></pre>
+      </section>
+
+      <hr style="margin: 2rem 0; border: 0; border-top: 1px solid var(--border);">
+
+      <section id="dom">
+        <h2>DOM Utilities</h2>
+        <p>A collection of helper functions for selecting, creating, and manipulating DOM elements.</p>
+
+        <h3>Selection</h3>
+        <h4><code>select(selector)</code></h4>
+        <p>Select a single element.</p>
+        <pre><code>const btn = select('#submit-btn');</code></pre>
+
+        <h4><code>selectAll(selector)</code></h4>
+        <p>Select all matching elements as an array.</p>
+        <pre><code>const items = selectAll('.item');
+items.forEach(item => item.style.color = 'red');</code></pre>
+
+        <h3>Manipulation</h3>
+        <h4><code>create(tag, props)</code></h4>
+        <p>Create a new element with properties.</p>
+        <pre><code>const div = create('div', {
+  className: 'container',
+  id: 'main',
+  style: { color: 'blue' },
+  onclick: () => console.log('Clicked!')
+});</code></pre>
+
+        <h4><code>append(parent, child)</code></h4>
+        <p>Append a child element to a parent.</p>
+        <pre><code>append(document.body, div);</code></pre>
+
+        <h4><code>remove(element)</code></h4>
+        <p>Remove an element from the DOM.</p>
+        <pre><code>remove(div);</code></pre>
+
+        <h4><code>empty(element)</code></h4>
+        <p>Remove all child nodes from an element.</p>
+        <pre><code>empty(listContainer);</code></pre>
+
+        <h4><code>clone(element, deep)</code></h4>
+        <p>Clone an element.</p>
+        <pre><code>const copy = clone(original, true);</code></pre>
+
+        <h3>Classes & Attributes</h3>
+        <h4><code>addClass(element, ...classes)</code></h4>
+        <pre><code>addClass(btn, 'active', 'primary');</code></pre>
+
+        <h4><code>removeClass(element, ...classes)</code></h4>
+        <pre><code>removeClass(btn, 'active');</code></pre>
+
+        <h4><code>toggleClass(element, className)</code></h4>
+        <pre><code>toggleClass(btn, 'hidden');</code></pre>
+
+        <h4><code>hasClass(element, className)</code></h4>
+        <pre><code>if (hasClass(btn, 'active')) { ... }</code></pre>
+
+        <h4><code>setAttributes(element, attributes)</code></h4>
+        <pre><code>setAttributes(input, { type: 'text', placeholder: 'Name' });</code></pre>
+
+        <h4><code>getAttribute(element, attribute)</code></h4>
+        <pre><code>const id = getAttribute(el, 'data-id');</code></pre>
+
+        <h3>Events</h3>
+        <h4><code>on(element, event, handler, options)</code></h4>
+        <pre><code>on(btn, 'click', handleClick);</code></pre>
+
+        <h4><code>off(element, event, handler, options)</code></h4>
+        <pre><code>off(btn, 'click', handleClick);</code></pre>
+
+        <h3>Traversal</h3>
+        <h4><code>matches(element, selector)</code></h4>
+        <pre><code>if (matches(target, '.btn')) { ... }</code></pre>
+
+        <h4><code>closest(element, selector)</code></h4>
+        <pre><code>const form = closest(input, 'form');</code></pre>
+      </section>
+
+      <hr style="margin: 2rem 0; border: 0; border-top: 1px solid var(--border);">
+
+      <section id="http">
+        <h2>HTTP Utilities</h2>
+        <p>Wrappers around the Fetch API with built-in error handling and JSON parsing.</p>
+
+        <h3>Core Methods</h3>
+        <h4><code>fetchJSON(url, options)</code></h4>
+        <p>Fetch JSON data from a URL.</p>
+        <pre><code>const data = await fetchJSON('/api/users');</code></pre>
+
+        <h4><code>get(url, options)</code></h4>
+        <p>Alias for fetchJSON (GET request).</p>
+
+        <h4><code>post(url, data, options)</code></h4>
+        <p>Send a POST request with JSON data.</p>
+        <pre><code>const result = await post('/api/users', { name: 'Alice' });</code></pre>
+
+        <h4><code>put(url, data, options)</code></h4>
+        <p>Send a PUT request.</p>
+        <pre><code>await put('/api/users/1', { name: 'Alice Smith' });</code></pre>
+
+        <h4><code>patch(url, data, options)</code></h4>
+        <p>Send a PATCH request.</p>
+
+        <h4><code>del(url, options)</code></h4>
+        <p>Send a DELETE request.</p>
+        <pre><code>await del('/api/users/1');</code></pre>
+
+        <h3>Helpers</h3>
+        <h4><code>createFetch(baseURL, defaultOptions)</code></h4>
+        <p>Create a configured fetch instance.</p>
+        <pre><code>const api = createFetch('https://api.example.com', {
+  headers: { 'Authorization': 'Bearer token' }
+});
+const users = await api.get('/users');</code></pre>
+
+        <h4><code>buildURL(baseURL, params)</code></h4>
+        <p>Construct a URL with query parameters.</p>
+        <pre><code>const url = buildURL('/search', { q: 'test', page: 1 });
+// /search?q=test&page=1</code></pre>
+      </section>
+
+      <hr style="margin: 2rem 0; border: 0; border-top: 1px solid var(--border);">
+
+      <section id="format">
+        <h2>Formatting Utilities</h2>
+        <p>Helpers for formatting strings, numbers, and dates.</p>
+
+        <h3>Date & Time</h3>
+        <ul>
+          <li><code>formatDate(date, locale)</code></li>
+          <li><code>formatDateTime(date, locale)</code></li>
+          <li><code>formatTime(date, locale)</code></li>
+          <li><code>formatRelativeTime(date, locale)</code> - e.g., "2 hours ago"</li>
+        </ul>
+
+        <h3>Strings</h3>
+        <ul>
+          <li><code>capitalize(str)</code></li>
+          <li><code>capitalizeWords(str)</code></li>
+          <li><code>truncate(str, length, suffix)</code></li>
+          <li><code>slugify(str)</code></li>
+          <li><code>camelCase(str)</code></li>
+          <li><code>kebabCase(str)</code></li>
+          <li><code>snakeCase(str)</code></li>
+          <li><code>escapeHTML(str)</code></li>
+        </ul>
+
+        <h3>Numbers</h3>
+        <ul>
+          <li><code>formatNumber(num, decimals, locale)</code></li>
+          <li><code>formatCurrency(amount, currency, locale)</code></li>
+          <li><code>formatPercent(value, decimals, normalize, locale)</code></li>
+          <li><code>formatBytes(bytes, decimals)</code></li>
+        </ul>
+
+        <h3>Validation</h3>
+        <ul>
+          <li><code>isEmail(email)</code></li>
+          <li><code>isURL(url)</code></li>
+        </ul>
+      </section>
+
+      <hr style="margin: 2rem 0; border: 0; border-top: 1px solid var(--border);">
+
       <section id="components">
         <h2>Component System</h2>
-        <p>AckerJS 1.0 introduces a lightweight component system based on Web Components.</p>
+        <p>A lightweight wrapper around Web Components.</p>
 
         <h3>Defining a Component</h3>
         <pre><code>import { component } from 'ackerjs';
@@ -56,6 +240,9 @@ component('user-card', (props) => {
 
         <h3>Using a Component</h3>
         <pre><code>&lt;user-card name="Alice" role="Admin"&gt;&lt;/user-card&gt;</code></pre>
+
+        <h3>Props</h3>
+        <p>Pass props as attributes. The component will re-render when observed attributes change.</p>
       </section>
     </main>
   </div>
@@ -65,7 +252,10 @@ component('user-card', (props) => {
     // Simple hash navigation handler
     window.addEventListener('hashchange', () => {
       const hash = window.location.hash.slice(1) || 'intro';
-      document.querySelector('acker-sidebar').setAttribute('active', hash);
+      const sidebar = document.querySelector('acker-sidebar');
+      if (sidebar) {
+        sidebar.setAttribute('active', hash);
+      }
 
       // Scroll to section
       const element = document.getElementById(hash);
@@ -76,7 +266,10 @@ component('user-card', (props) => {
 
     // Initial active state
     const hash = window.location.hash.slice(1) || 'intro';
-    document.querySelector('acker-sidebar').setAttribute('active', hash);
+    const sidebar = document.querySelector('acker-sidebar');
+    if (sidebar) {
+      sidebar.setAttribute('active', hash);
+    }
   </script>
 </body>
 
