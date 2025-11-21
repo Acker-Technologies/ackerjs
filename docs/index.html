@@ -1,259 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AckerJS - Lightweight JavaScript Framework</title>
-  <meta name="description" content="A lightweight, modular JavaScript framework with TypeScript support. Essential utilities for DOM manipulation, HTTP requests, and data formatting.">
-  <link rel="stylesheet" href="./styles.css?v=2">
-  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code&display=swap"
+    rel="stylesheet">
 </head>
+
 <body>
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="container nav-container">
-      <div class="nav-brand">
-        <img src="logo.png" alt="AckerJS Logo" class="logo">
-      </div>
-      <ul class="nav-links">
-        <li><a href="#features">Features</a></li>
-        <li><a href="#docs">Docs</a></li>
-        <li><a href="#examples">Examples</a></li>
-        <li><a href="https://github.com/acker-technologies/ackerjs" target="_blank">GitHub</a></li>
-        <li><a href="#get-started" class="btn-primary">Get Started</a></li>
-      </ul>
-    </div>
-  </nav>
+  <acker-navbar active="home"></acker-navbar>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <h1 class="hero-title">
-          Build Modern Web Apps with
-          <span class="gradient-text">AckerJS</span>
-        </h1>
-        <p class="hero-subtitle">
-          A lightweight, modular JavaScript framework for developers with full TypeScript support.
-          Essential utilities for DOM manipulation, HTTP requests, and data formatting - all in a tree-shakable package.
-        </p>
-        <div class="hero-cta">
-          <a href="#get-started" class="btn btn-large btn-primary">Get Started</a>
-          <a href="#docs" class="btn btn-large btn-secondary">Documentation</a>
-        </div>
-        <div class="hero-code">
-          <pre><code>npx create-acker-app@latest</code></pre>
-        </div>
-      </div>
-    </div>
-  </section>
+  <main>
+    <acker-hero></acker-hero>
+    <acker-features></acker-features>
+  </main>
 
-  <!-- Features Section -->
-  <section id="features" class="features">
-    <div class="container">
-      <h2 class="section-title">Why Choose AckerJS?</h2>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🚀</div>
-          <h3>Lightweight</h3>
-          <p>Small bundle size with zero dependencies. Only ship what you need.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">📦</div>
-          <h3>Modular</h3>
-          <p>Import only what you need for optimal tree-shaking and performance.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">💪</div>
-          <h3>TypeScript</h3>
-          <p>Full type safety with comprehensive JSDoc comments and IntelliSense.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🎯</div>
-          <h3>Developer-friendly</h3>
-          <p>Clean, intuitive API with clear error messages and documentation.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">⚡</div>
-          <h3>Modern</h3>
-          <p>Built with ES2020+ features for modern JavaScript development.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🛠️</div>
-          <h3>CLI Tooling</h3>
-          <p>Scaffold projects instantly with create-acker-app CLI tool.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <acker-footer></acker-footer>
 
-  <!-- Get Started Section -->
-  <section id="get-started" class="get-started">
-    <div class="container">
-      <h2 class="section-title">Get Started in Seconds</h2>
-      <div class="install-steps">
-        <div class="install-card">
-          <h3>1. Create a New App</h3>
-          <pre><code>npx create-acker-app@latest</code></pre>
-        </div>
-        <div class="install-card">
-          <h3>2. Start Development</h3>
-          <pre><code>cd my-app
-npm install
-npm run dev</code></pre>
-        </div>
-        <div class="install-card">
-          <h3>3. Build for Production</h3>
-          <pre><code>npm run build</code></pre>
-        </div>
-      </div>
-      <p class="install-note">Or install directly: <code>npm install ackerjs</code></p>
-    </div>
-  </section>
-
-  <!-- Examples Section -->
-  <section id="examples" class="examples">
-    <div class="container">
-      <h2 class="section-title">Quick Examples</h2>
-      <div class="examples-grid">
-        <div class="example-card">
-          <h3>DOM Manipulation</h3>
-          <pre><code>import { DOM } from 'ackerjs';
-
-const button = DOM.create('button', {
-  textContent: 'Click Me',
-  className: 'btn-primary'
-});
-
-DOM.on(button, 'click', () => {
-  alert('Button clicked!');
-});
-
-DOM.append(document.body, button);</code></pre>
-        </div>
-        <div class="example-card">
-          <h3>HTTP Requests</h3>
-          <pre><code>import { HTTP } from 'ackerjs';
-
-// Fetch data
-const user = await HTTP.fetchJSON(
-  'https://api.example.com/user/1'
-);
-
-// Post data
-await HTTP.postJSON('/api/users', {
-  name: 'John Doe',
-  email: 'john@example.com'
-});</code></pre>
-        </div>
-        <div class="example-card">
-          <h3>Data Formatting</h3>
-          <pre><code>import { Format } from 'ackerjs';
-
-// Dates
-Format.formatDate(new Date());
-// "11/16/2025"
-
-// Currency
-Format.formatCurrency(1234.56);
-// "$1,234.56"
-
-// Strings
-Format.slugify('Hello World!');
-// "hello-world"</code></pre>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Documentation Section -->
-  <section id="docs" class="docs">
-    <div class="container">
-      <h2 class="section-title">Documentation</h2>
-      <div class="docs-grid">
-        <div class="doc-category">
-          <h3>DOM Helpers</h3>
-          <ul>
-            <li><code>select(selector)</code> - Select a single element</li>
-            <li><code>selectAll(selector)</code> - Select multiple elements</li>
-            <li><code>create(tag, props)</code> - Create a new element</li>
-            <li><code>append(parent, child)</code> - Append child to parent</li>
-            <li><code>remove(element)</code> - Remove element from DOM</li>
-            <li><code>addClass/removeClass</code> - Manage CSS classes</li>
-            <li><code>on/off</code> - Event listeners</li>
-            <li><code>attr/data</code> - Attributes and data</li>
-          </ul>
-        </div>
-        <div class="doc-category">
-          <h3>HTTP Utilities</h3>
-          <ul>
-            <li><code>fetchJSON(url)</code> - GET JSON data</li>
-            <li><code>postJSON(url, data)</code> - POST with JSON</li>
-            <li><code>putJSON(url, data)</code> - PUT with JSON</li>
-            <li><code>deleteJSON(url)</code> - DELETE request</li>
-            <li><code>get/post/put/delete</code> - Generic methods</li>
-            <li><code>createAPI(baseURL)</code> - API instance</li>
-          </ul>
-        </div>
-        <div class="doc-category">
-          <h3>Format Utilities</h3>
-          <ul>
-            <li><code>formatDate/DateTime/Time</code> - Date formatting</li>
-            <li><code>formatNumber/Currency</code> - Number formatting</li>
-            <li><code>capitalize/capitalizeWords</code> - Text casing</li>
-            <li><code>truncate(str, length)</code> - Truncate strings</li>
-            <li><code>slugify(str)</code> - URL-friendly slugs</li>
-            <li><code>camelCase/kebabCase</code> - Case conversion</li>
-          </ul>
-        </div>
-      </div>
-      <div class="docs-cta">
-        <a href="https://github.com/acker-technologies/ackerjs#readme" class="btn btn-large btn-primary" target="_blank">
-          View Full Documentation
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
-          <img src="logo.png" alt="AckerJS Logo" class="footer-logo">
-          <p>A lightweight JavaScript framework for modern web development.</p>
-        </div>
-        <div class="footer-links">
-          <div class="footer-column">
-            <h4>Framework</h4>
-            <ul>
-              <li><a href="https://github.com/acker-technologies/ackerjs">GitHub</a></li>
-              <li><a href="https://www.npmjs.com/package/ackerjs">NPM Package</a></li>
-              <li><a href="#docs">Documentation</a></li>
-            </ul>
-          </div>
-          <div class="footer-column">
-            <h4>Tools</h4>
-            <ul>
-              <li><a href="https://www.npmjs.com/package/create-acker-app">create-acker-app</a></li>
-              <li><a href="https://www.npmjs.com/package/acker-ui">AckerUI</a></li>
-            </ul>
-          </div>
-          <div class="footer-column">
-            <h4>Community</h4>
-            <ul>
-              <li><a href="https://github.com/acker-technologies/ackerjs/issues">Issues</a></li>
-              <li><a href="https://github.com/acker-technologies/ackerjs/discussions">Discussions</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 Acker Technologies. MIT License.</p>
-      </div>
-    </div>
-  </footer>
-
-  <script src="./script.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
+
 </html>
